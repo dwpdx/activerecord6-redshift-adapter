@@ -143,7 +143,7 @@ module ActiveRecord
         # Queries the database and returns the results in an Array-like object
         def query(sql, name = nil) #:nodoc:
           log(sql, name) do
-            result_as_array @connection.exec_query(sql)
+            result_as_array @connection.async_exec_params(sql)
           end
         end
 
@@ -151,7 +151,7 @@ module ActiveRecord
         # or raising a PG::Error exception otherwise.
         def execute(sql, name = nil)
           log(sql, name) do
-            @connection.exec_query(sql)
+            @connection.async_exec_params(sql)
           end
         end
 
